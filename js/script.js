@@ -73,7 +73,7 @@ function postData() {
 
 // Cancellazione di una voce
 function deleteData() {
-    var id = $(this).parent().data('id');
+    var id = $(this).prev().data('id');
     $.ajax({
         url: 'http://157.230.17.132:3035/todos/' + id,
         method: 'DELETE',
@@ -87,22 +87,23 @@ function deleteData() {
     });
 }
 
-
 // Inizializzazione dell'aggiornamento di una voce
 function updateItem() {
     var itemId = $(this).data('id');
-    var thisInput = $(`.update[data-id="${itemId}"]`);
+    var thisInput = `.update[data-id="${itemId}"]`;
 
-    $(this).toggle();
-    $(this).next().toggle().focus();
+    // Nascondo 'li' e visualizzo 'input' relativi (stesso 'id')
+    $(this).parent().toggle();
+    $('.todo').find(thisInput).toggle().focus();
 
-    thisInput.keydown(function (e) {
+    $(thisInput).keydown(function (e) {
         if (e.which == 13 || e.keyCode == 13) {
-            var update = thisInput.val();
+            var update = $(thisInput).val();
             patchData(itemId, update);
         }
     });
 }
+
 // Modifica di una voce
 function patchData(id, item) {
     $.ajax({
