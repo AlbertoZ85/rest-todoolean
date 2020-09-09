@@ -12,6 +12,18 @@
 </head>
 
 <body>
+    <h1>To-Do List</h1>
+
+    <input id="enter-input" type="text" placeholder="Inserisci una voce">
+    <button id="enter-btn">Enter</button>
+
+    <ul class="todo"></ul>
+
+    <script id="todo-template" type="text/x-handlebars-template">
+        <li class="item" data-id="{{id}}">{{text}} <span class="delete"><i class="fas fa-times"></i></span></li>
+        <input class="update" data-id="{{id}}" value="{{text}}" type="text">
+        <!-- <span class="update" class="delete"><i class="fas fa-times"></i></span> -->
+    </script>
 
     <script src="js/script.js" charset="utf-8"></script>
 </body>
